@@ -2,13 +2,14 @@ package com.itschool.retrofitexample.Services;
 
 import android.util.Log;
 
+import com.itschool.retrofitexample.Controllers.DnDAPI;
 import com.itschool.retrofitexample.Controllers.ShibeAPI;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkDNDService {
-    private static NetworkService mInstance;
+    private static NetworkDNDService mInstance;
     private Retrofit retroService;
 
     public NetworkDNDService() {
@@ -25,15 +26,15 @@ public class NetworkDNDService {
         return retroService;
     }
 
-    public ShibeAPI createDNDAPI(){
-        ShibeAPI shibeAPI = retroService.create(ShibeAPI.class);
-        return shibeAPI;
+    public DnDAPI createDNDAPI(){
+        DnDAPI dndAPI = retroService.create(DnDAPI.class);
+        return dndAPI;
     }
 
 
-    public static NetworkService getInstance() {
+    public static NetworkDNDService getInstance() {
         if (mInstance == null) {
-            mInstance = new NetworkService();
+            mInstance = new NetworkDNDService();
         }
         return mInstance;
     }

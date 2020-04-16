@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/name_spell"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="aa" />
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_alignParentEnd="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:layout_below="@id/name_spell"
+        android:text="ddd" />
+
+
+
+
+</RelativeLayout>

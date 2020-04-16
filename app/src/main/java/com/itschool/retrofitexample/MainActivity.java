@@ -3,6 +3,7 @@ package com.itschool.retrofitexample;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements  IResourcePipe{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         butt = findViewById(R.id.button);
+        next = findViewById(R.id.next);
         imageView = findViewById(R.id.image);
         networkService = NetworkService.getInstance();
         shibeAPI = networkService.createShubyAPI();
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements  IResourcePipe{
         };
         shibeController.setHandler(handler);
         Call call = shibeAPI.getUrlShibes();
-        /*call.enqueue(shibeController);*/
+
 
         butt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,24 +63,28 @@ public class MainActivity extends AppCompatActivity implements  IResourcePipe{
                 if (!messag.equals("") && !messag.equals(prev)) {
                     Toast.makeText(getApplicationContext(), "Сейчас загрузим", Toast.LENGTH_SHORT).show();
                     prev = messag;
+                    call.clone().enqueue(shibeController);
                     imageLoad(messag, shibeAPI);
                 }
                 else if (prev.equals(messag) || messag.equals("")){
                     Toast.makeText(getApplicationContext(), "Спрашиваем следующее", Toast.LENGTH_SHORT).show();
                     call.clone().enqueue(shibeController);
                 }
-                /*else {
-                    Toast.makeText(getApplicationContext(), "Ждем", Toast.LENGTH_SHORT).show();
-                    call.enqueue(shibeController);
-                }*/
 
+
+            }
+        });
+
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Main2Activity.class));
             }
         });
     }
 
-    public void setMessag(String messag) {
-        this.messag = messag;
-    }
+
 
     private void imageLoad(String message, ShibeAPI shibeAPI)  {
         Log.d("TAG", message + "- это ссылка");

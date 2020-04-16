@@ -48,15 +48,9 @@ public class ShibeController implements Callback<List<String>> {
     @Override
     public void onResponse(Call<List<String>> call, Response<List<String>> response) {
         if (response.isSuccessful()) {
-           /* List<String> changesList = response.body();
-            changesList.forEach(new Consumer<String>() {
-                @Override
-                public void accept(String change) {
-                    Log.d("TAG", change);
-                }
-            });*/
+
             shibes = (ArrayList<String>) response.body();
-            //Log.d("TAG", "eeee" + shibes);
+
             Message msg = Message.obtain();
             msg.obj = shibes.get(0);
             handler.sendMessage(msg);
@@ -75,9 +69,5 @@ public class ShibeController implements Callback<List<String>> {
         t.printStackTrace();
     }
 
-
-    public String shibeName() {
-        return shibes.get(0);
-    }
 
 }
